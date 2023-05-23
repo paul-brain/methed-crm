@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
   <title>CRM</title>
 </head>
 <body class="page-crm">
@@ -142,7 +143,7 @@
 
   </div>
   <!-- Модальное окно -->
-  <div class="overlay">
+  <div class="overlay overlay--show">
     <div class="modal">
       <div class="modal__headers">
         <h3 class="modal__title">Добавить товар</h3>
@@ -208,7 +209,7 @@
       </form>
     </div>
     <!-- Модальное окно: что-то пошло не так -->
-    <div class="modal-wrong">
+    <div class="modal-wrong modal-wrong--show">
       <button class="modal__btn-close"></button>
       <img class="modal-wrong__img" src="img/wrong.svg" alt="Something went wrong">
       <div class="modal-wrong__text">Что-то пошло не так</div>
