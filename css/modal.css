@@ -222,6 +222,7 @@
 }
 
 .form__total-price {
+  display: inline;
   font-size: 18px;
   line-height: 22px;
   font-weight: 700;
