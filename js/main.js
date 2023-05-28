@@ -45,3 +45,24 @@ const renderGoods = (goods) => {
 };
 
 renderGoods(goods);
+
+const addBtn = document.querySelector('.products__add-btn');
+const closeBtn = document.querySelector('.modal__btn-close');
+const modalOverlay = document.querySelector('.overlay');
+const modalWindow = document.querySelector('.modal');
+
+addBtn.addEventListener('click', () => {
+  modalOverlay.classList.add('overlay--show');
+});
+
+closeBtn.addEventListener('click', () => {
+  modalOverlay.classList.remove('overlay--show');
+});
+
+modalOverlay.addEventListener('click', () => {
+  modalOverlay.classList.remove('overlay--show');
+});
+
+modalWindow.addEventListener('click', event => {
+  event.stopPropagation();
+});
