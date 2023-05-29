@@ -47,22 +47,35 @@ const renderGoods = (goods) => {
 renderGoods(goods);
 
 const addBtn = document.querySelector('.products__add-btn');
-const closeBtn = document.querySelector('.modal__btn-close');
 const modalOverlay = document.querySelector('.overlay');
-const modalWindow = document.querySelector('.modal');
 
 addBtn.addEventListener('click', () => {
   modalOverlay.classList.add('overlay--show');
 });
 
-closeBtn.addEventListener('click', () => {
-  modalOverlay.classList.remove('overlay--show');
+modalOverlay.addEventListener('click', e => {
+  const target = e.target;
+
+  if (target === modalOverlay || target.classList.contains('modal__btn-close')) {
+    modalOverlay.classList.remove('overlay--show');
+  }
 });
 
-modalOverlay.addEventListener('click', () => {
-  modalOverlay.classList.remove('overlay--show');
-});
+tableBody.addEventListener('click', e => {
+  const target = e.target;
 
-modalWindow.addEventListener('click', event => {
-  event.stopPropagation();
+  if (target.classList.contains('products__actions-btn--delete')) {
+    const row = target.closest('tr');
+    const productId = + row.firstElementChild.textContent;
+    const id = goods.findIndex((good, i, array) => {
+      return good.id === productId;
+    });
+
+    row.remove();
+
+    if (id !== -1) {
+      goods.splice(id, 1);
+      console.log(goods);
+    }
+  }
 });
