@@ -140,7 +140,7 @@
   margin-bottom: 0;
 }
 
-.checkbox {
+.checkbox { /* label */
   position: relative;
   display: inline-block;
   vertical-align: top;
@@ -193,11 +193,10 @@
   display: inline-block;
   vertical-align: top;
   width: calc(100% - 50px);
-  background-color: #EEEEEE;
 }
 
-.checkbox__input:checked + .form__field-text {
-  background-color: #F4F2FF;
+.checkbox + .form__field-text:disabled {
+  background-color: #EEEEEE;
 }
 
 .form__description {

@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/generate_id.js" defer></script>
   <script src="js/goods.js" defer></script>
   <script src="js/main.js" defer></script>
   <title>CRM</title>
@@ -20,7 +21,7 @@
       <h1 class="products__title">CMS</h1>
       <div class="products__total">
         Итоговая стоимость:
-        <span class="products__total-price">$900.00</span>
+        <p class="products__total-price">$900.00</p>
       </div>
     </div>
 
@@ -144,7 +145,7 @@
 
   </div>
   <!-- Модальное окно -->
-  <div class="overlay">
+  <div class="overlay overlay--show">
     <div class="modal">
       <div class="modal__headers">
         <h3 class="modal__title">Добавить товар</h3>
@@ -155,15 +156,15 @@
         <fieldset class="form__inner">
           <label class="form__label form__label--name">
             <span class="form__label-text">Наименование</span>
-            <input class="form__field-text" type="text" name="name">
+            <input class="form__field-text" type="text" name="title" required>
           </label>
           <label class="form__label form__label--category">
             <span class="form__label-text">Категория</span>
-            <input class="form__field-text" type="text" name="category">
+            <input class="form__field-text" type="text" name="category" required>
           </label>
           <label class="form__label form__label--units">
             <span class="form__label-text">Единицы измерения</span>
-            <input class="form__field-text" type="text" name="units">
+            <input class="form__field-text" type="text" name="units" required>
           </label>
 
           <div class="form__discont">
@@ -171,22 +172,22 @@
               <span class="form__label-text">Дисконт</span>
             </label>
             <label class="checkbox">
-              <input class="checkbox__input" type="checkbox" name="discont">
+              <input class="checkbox__input" type="checkbox" name="discont_on">
             </label>
-            <input class="form__field-text" type="text" name="discont_text" id="discont">
+            <input class="form__field-text" type="number" name="discont" id="discont" disabled required>
           </div>
 
           <label class="form__label form__label--description">
             <span class="form__label-text">Описание</span>
-            <textarea class="form__description" name="description" cols="20" rows="2"></textarea>
+            <textarea class="form__description" name="description" cols="20" rows="2" required></textarea>
           </label>
           <label class="form__label form__label--count">
             <span class="form__label-text">Количество</span>
-            <input class="form__field-text" type="text" name="count">
+            <input class="form__field-text" type="number" name="count" required>
           </label>
           <label class="form__label form__label--price">
             <span class="form__label-text">Цена</span>
-            <input class="form__field-text" type="text" name="price">
+            <input class="form__field-text" type="number" name="price" required>
           </label>
           <div class="form__notice">
             Изображение не должно превышать размер 1 Мб

@@ -56,3 +56,7 @@ let goods = [
     }
   }
 ];
+
+const calcTotalPrice = (goods) => {
+  return goods.reduce((sum, product) => sum + product.price * product.count, 0);
+};
