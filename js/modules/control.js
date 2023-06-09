@@ -46,6 +46,28 @@ const deleteControl = (list, goods) => {
   });
 };
 
+// Просмотр картинки
+const imgControl = (list) => {
+  list.addEventListener('click', e => {
+    const target = e.target;
+
+    // Нажали на кнопку изображения
+    if (target.classList.contains('products__actions-btn--img')) {
+      const tr = target.closest('tr');
+      const imgUrl = location.origin + '/' + tr.dataset.pic;
+
+      const windowX = 'left=' + (screen.width / 2 - 300);
+      const windowY = 'top=' + (screen.height / 2 - 300);
+      const windowParams = `width=600,height=600,${windowX},${windowY}`;
+      const imgWindow = open('about:blank', '', windowParams);
+
+      imgWindow.document.body.innerHTML = `
+        <img src="${imgUrl}" style="max-width: 100%;max-height: 100%">
+      `;
+    }
+  });
+};
+
 const formControl = (list, goods, form, overlay) => {
   const formTotalPrice = document.querySelector('.form__total-price');
 
@@ -98,4 +120,5 @@ export default {
   modalControl,
   deleteControl,
   formControl,
+  imgControl,
 };

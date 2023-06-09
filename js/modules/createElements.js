@@ -11,7 +11,8 @@ export const createRow = (product) => {
       td.append(product.price * product.count);
     } else if (item === 'btns') {
       td.insertAdjacentHTML('afterBegin', `<div class="products__actions">
-        <button class="products__actions-btn"></button>
+        <button class="products__actions-btn products__actions-btn--img">
+        </button>
         <button class="products__actions-btn products__actions-btn--edit">
         </button>
         <button class="products__actions-btn products__actions-btn--delete">
@@ -27,6 +28,9 @@ export const createRow = (product) => {
   tdItems.forEach((item) => {
     tr.append(item);
   });
+
+  // tr.setAttribute('data-pic', 'url');
+  tr.dataset.pic = 'img/promo-item-3.jpg';
 
   return tr;
 };

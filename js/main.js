@@ -6,6 +6,7 @@ const {
   modalControl,
   deleteControl,
   formControl,
+  imgControl,
 } = control;
 
 const init = () => {
@@ -18,6 +19,7 @@ const init = () => {
   deleteControl(tableBody, goods);
   modalControl(addBtn, modalOverlay);
   formControl(tableBody, goods, form, modalOverlay);
+  imgControl(tableBody);
 };
 
 init();
