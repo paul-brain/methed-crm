@@ -24,6 +24,7 @@
     </div>
 
     <div class="products__wrapper">
+      <!-- <div class="error">Произошла ошибка!</div> -->
       <div class="products__control products__control--top">
         <button class="products__filter-btn">Фильтр</button>
         <form class="products__search" action="#" method="post">
@@ -44,78 +45,14 @@
             <td>Итог</td>
             <td></td>
           </tr>
-          <!-- <tr>
-            <td>246016548</td>
-            <td>Навигационная система Soundmax</td>
-            <td>Техника для дома</td>
+          <!-- <tr data-pic="img/promo-item-3.jpg">
+            <td>10000001</td>
+            <td>Нет в базе: демонстрация ошибки</td>
+            <td>Нет</td>
             <td>шт</td>
-            <td>5</td>
-            <td>$100</td>
-            <td>$500</td>
-            <td>
-              <div class="products__actions">
-                <button class="products__actions-btn"></button>
-                <button class="products__actions-btn products__actions-btn--edit"></button>
-                <button class="products__actions-btn products__actions-btn--delete"></button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>246016548</td>
-            <td>Настольная игра “На 4-х ногах”</td>
-            <td>Настольные игры</td>
-            <td>шт</td>
-            <td>12</td>
-            <td>$14</td>
-            <td>$168</td>
-            <td>
-              <div class="products__actions">
-                <button class="products__actions-btn products__actions-btn--img"></button>
-                <button class="products__actions-btn products__actions-btn--edit"></button>
-                <button class="products__actions-btn products__actions-btn--delete"></button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>246016548</td>
-            <td>Навигационная система Soundmax</td>
-            <td>Техника для дома</td>
-            <td>шт</td>
-            <td>5</td>
-            <td>$100</td>
-            <td>$500</td>
-            <td>
-              <div class="products__actions">
-                <button class="products__actions-btn products__actions-btn--img"></button>
-                <button class="products__actions-btn products__actions-btn--edit"></button>
-                <button class="products__actions-btn products__actions-btn--delete"></button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>246016548</td>
-            <td>Навигационная система Soundmax</td>
-            <td>Техника для дома</td>
-            <td>шт</td>
-            <td>5</td>
-            <td>$100</td>
-            <td>$500</td>
-            <td>
-              <div class="products__actions">
-                <button class="products__actions-btn products__actions-btn--img"></button>
-                <button class="products__actions-btn products__actions-btn--edit"></button>
-                <button class="products__actions-btn products__actions-btn--delete"></button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>246016548</td>
-            <td>Навигационная система Soundmax</td>
-            <td>Техника для дома</td>
-            <td>шт</td>
-            <td>5</td>
-            <td>$100</td>
-            <td>$500</td>
+            <td>0</td>
+            <td>0000</td>
+            <td>0000</td>
             <td>
               <div class="products__actions">
                 <button class="products__actions-btn products__actions-btn--img"></button>
@@ -154,15 +91,15 @@
         <fieldset class="form__inner">
           <label class="form__label form__label--name">
             <span class="form__label-text">Наименование</span>
-            <input class="form__field-text" type="text" name="title" required>
+            <input class="form__field-text" type="text" name="title" required value="Новый товар">
           </label>
           <label class="form__label form__label--category">
             <span class="form__label-text">Категория</span>
-            <input class="form__field-text" type="text" name="category" required>
+            <input class="form__field-text" type="text" name="category" required value="Продукты">
           </label>
           <label class="form__label form__label--units">
             <span class="form__label-text">Единицы измерения</span>
-            <input class="form__field-text" type="text" name="units" required>
+            <input class="form__field-text" type="text" name="units" required value="кг">
           </label>
 
           <div class="form__discont">
@@ -177,15 +114,15 @@
 
           <label class="form__label form__label--description">
             <span class="form__label-text">Описание</span>
-            <textarea class="form__description" name="description" cols="20" rows="2" required></textarea>
+            <textarea class="form__description" name="description" cols="20" rows="2" required>Новое описание</textarea>
           </label>
           <label class="form__label form__label--count">
             <span class="form__label-text">Количество</span>
-            <input class="form__field-text" type="number" name="count" required>
+            <input class="form__field-text" type="number" name="count" required value="4">
           </label>
           <label class="form__label form__label--price">
             <span class="form__label-text">Цена</span>
-            <input class="form__field-text" type="number" name="price" required>
+            <input class="form__field-text" type="number" name="price" required value="2500">
           </label>
           <div class="form__notice">
             Изображение не должно превышать размер 1 Мб

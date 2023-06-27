@@ -1,15 +1,21 @@
 import {updateTotalPrice} from './render.js';
-import {generateId} from './helpers.js';
+import {addGood} from './ajax.js';
+import {deleteGood} from './ajax.js';
 import {createRow} from './createElements.js';
 
 const closeModal = (modalOverlay) => {
   modalOverlay.classList.remove('overlay--show');
+
+  for (let modal of modalOverlay.children) {
+    modal.classList.remove('modal--show', 'modal-wrong--show');
+  }
 };
 
 // Обработка событий: открыть/закрыть модальное окно
 const modalControl = (addBtn, modalOverlay) => {
   addBtn.addEventListener('click', () => {
     modalOverlay.classList.add('overlay--show');
+    modalOverlay.firstElementChild.classList.add('modal--show');
   });
 
   modalOverlay.addEventListener('click', e => {
@@ -31,14 +37,13 @@ const deleteControl = (list, goods) => {
 
     if (target.classList.contains('products__actions-btn--delete')) {
       const row = target.closest('tr');
-      const productId = +row.firstElementChild.textContent;
+      const productId = row.firstElementChild.textContent;
       const id = goods.findIndex((good) => good.id === productId);
-
-      row.remove();
 
       if (id !== -1) {
         goods.splice(id, 1);
-        console.log(goods);
+        deleteGood(productId);
+        row.remove();
       }
 
       updateTotalPrice(goods);
@@ -93,22 +98,14 @@ const formControl = (list, goods, form, overlay) => {
   });
 
   // Обработка событий формы: добавить новый товар, обновить итоговую сумму
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const newProduct = Object.fromEntries(formData);
-    const newProductForTable = {
-      id: newProduct.id = generateId(),
-      title: newProduct.title,
-      category: newProduct.category,
-      units: newProduct.units,
-      count: newProduct.count,
-      price: newProduct.price,
-    };
-
-    goods.push(newProduct);
-    list.append(createRow(newProductForTable));
+    const productToAdd = Object.fromEntries(formData);
+    const addedProduct = await addGood(productToAdd);
+    list.append(createRow(addedProduct));
+    goods.push(addedProduct);
     updateTotalPrice(goods);
 
     form.reset();
