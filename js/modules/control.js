@@ -107,7 +107,7 @@ const formControl = (list, goods, form, overlay) => {
     list.append(createRow(addedProduct));
     goods.push(addedProduct);
     updateTotalPrice(goods);
-
+    console.log(addedProduct);
     form.reset();
     closeModal(overlay);
   });

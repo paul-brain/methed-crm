@@ -48,6 +48,7 @@ export const getGoods = () => {
   const url = 'https://knowledgeable-mammoth-parka.glitch.me/api/goods';
   const options = {
     method: 'GET',
+    callbackError: errorNotice,
   };
   const goods = fetchRequest(url, options);
 
