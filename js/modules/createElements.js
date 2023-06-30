@@ -97,7 +97,7 @@ export const createModal = () => {
       <fieldset class="form__outer">
         <div class="form__total">
           Итоговая стоимость:
-          <p class="form__total-price">$900.00</p>
+          <p class="form__total-price">$0.00</p>
         </div>
         <button class="form__btn btn" type="submit">Отправить</button>
       </fieldset>

@@ -9,6 +9,7 @@ import {loadStyle} from './loadStyle.js';
 const closeModal = (modalOverlay) => {
   const form = modalOverlay.querySelector('.form');
 
+  form.querySelector('.form__total-price').textContent = '$0';
   modalOverlay.querySelector('.modal__info').textContent = '';
   modalOverlay.querySelector('.modal__title').textContent = 'Добавить товар';
   modalOverlay.classList.remove('overlay--show');
@@ -72,6 +73,7 @@ const actionsControl = (list, goods, form, overlay) => {
 
       overlay.querySelector('.modal__title').textContent = 'Редактировать товар';
       overlay.querySelector('.modal__info').textContent = 'id: ' + productId;
+      form.querySelector('.form__total-price').textContent = '$' + good.price * good.count;
 
       form.id = good.id;
       form.title.value = good.title;
