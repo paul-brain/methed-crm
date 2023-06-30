@@ -1,3 +1,5 @@
+const URL = 'https://knowledgeable-mammoth-parka.glitch.me/api/goods';
+
 const fetchRequest = async (url, {
   method = 'GET',
   callback,
@@ -45,7 +47,7 @@ export const errorNotice = (message) => {
 };
 
 export const getGoods = () => {
-  const url = 'https://knowledgeable-mammoth-parka.glitch.me/api/goods';
+  const url = URL;
   const options = {
     method: 'GET',
     callbackError: errorNotice,
@@ -55,8 +57,19 @@ export const getGoods = () => {
   return goods;
 };
 
+export const getGood = (id) => {
+  const url = `${URL}/${id}`;
+  const options = {
+    method: 'GET',
+    callbackError: errorNotice,
+  };
+  const good = fetchRequest(url, options);
+
+  return good;
+};
+
 export const addGood = (product) => {
-  const url = 'https://knowledgeable-mammoth-parka.glitch.me/api/goods';
+  const url = URL;
   const options = {
     method: 'POST',
     headers: {
@@ -70,8 +83,23 @@ export const addGood = (product) => {
   return good;
 };
 
+export const editGood = (id, product) => {
+  const url = `${URL}/${id}`;
+  const options = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: product,
+    callbackError: errorNotice,
+  };
+  const good = fetchRequest(url, options);
+
+  return good;
+};
+
 export const deleteGood = (id) => {
-  const url = `https://knowledgeable-mammoth-parka.glitch.me/api/goods/${id}`;
+  const url = `${URL}/${id}`;
   const options = {
     method: 'delete',
     callbackError: errorNotice,
