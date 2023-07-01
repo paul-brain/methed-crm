@@ -245,10 +245,28 @@
   padding: 10px 25px;
 }
 
-.form__btn--add-img {
+.btn-file {
+  position: relative;
   padding: 10px 21px;
+  max-width: 250px;
+  overflow: hidden;
+
   font-size: 14px;
   line-height: 17px;
+  text-align: center;
+}
+
+.btn-file__input {
+  position: absolute;
+	z-index: -1;
+	opacity: 0;
+	display: block;
+	width: 0;
+	height: 0;
+}
+
+.btn-file__text {
+  white-space: nowrap;
 }
 
 .form__downloads {
@@ -262,6 +280,7 @@
   max-width: 200px;
   max-height: 200px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .form__downloads-inner:before {
@@ -323,7 +342,7 @@
 .form__notice {
   grid-area: notice;
 }
-.form__btn--add-img {
+.btn-file {
   grid-area: button;
   align-self: end;
 }

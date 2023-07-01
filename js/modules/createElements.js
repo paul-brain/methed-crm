@@ -82,14 +82,13 @@ export const createModal = () => {
           <span class="form__label-text">Цена</span>
           <input class="form__field-text" type="number" name="price" required value="">
         </label>
-        <div class="form__notice">
-          Изображение не должно превышать размер 1 Мб
-        </div>
-        <button class="form__btn btn form__btn--add-img" type="submit">Добавить изображение</button>
+        <div class="form__notice"></div>
+        <label class="form__btn btn btn-file">
+          <input class="btn-file btn-file__input" type="file" name="image" accept="image/*">
+          <span class="btn-file__text">Добавить изображение</span>
+        </label>
         <div class="form__downloads">
-          <div class="form__downloads-inner">
-            <img class="form__downloads-image" src="img/product-photo.jpg" alt="product photo">
-          </div>
+          <div class="form__downloads-inner"></div>
         </div>
         <!-- <input type="file" name="image"> -->
         <!-- <input type="hidden" name="id" value="101"> -->

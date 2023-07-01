@@ -135,6 +135,34 @@ const formControl = (list, goods, form, overlay) => {
     if (target === form.count || target === form.price) {
       formTotalPrice.textContent = '$' + form.price.value * form.count.value;
     }
+
+    // Работа с кнопкой «Добавить изображение»
+    if (target.classList.contains('btn-file') && target.files.length > 0) {
+      const image = target.files[0];
+      const text = target.nextElementSibling;
+      const notice = form.querySelector('.form__notice');
+      const previewWrapper = form.querySelector('.form__downloads-inner');
+      const preview = document.createElement('img');
+      const src = URL.createObjectURL(image);
+
+      if (image.size > 1048576) {
+        notice.textContent = 'Изображение не должно превышать размер 1 Мб';
+        target.value = ""; // сброс input file
+      } else {
+        notice.textContent = '';
+        preview.src = src;
+        previewWrapper.append(preview);
+        text.textContent = image.name;
+      }
+
+      // Сбрасываем выбор файла
+      previewWrapper.addEventListener('click', () => {
+        target.value = ""; // target.files.length = 0
+        previewWrapper.textContent = '';
+        notice.textContent = '';
+        text.textContent = 'Добавить изображение';
+      });
+    }
   });
 
   // Обработка событий формы: добавить новый товар, обновить итоговую сумму
