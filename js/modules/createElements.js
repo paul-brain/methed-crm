@@ -112,3 +112,14 @@ export const createModal = () => {
 
   return overlay;
 };
+
+export const createPreload = () => {
+  const overlay = document.createElement('div');
+  const preload = document.createElement('div');
+
+  overlay.classList.add('overlay-preload');
+  preload.classList.add('preload');
+  overlay.append(preload);
+
+  return overlay;
+};

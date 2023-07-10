@@ -1,3 +1,5 @@
+import {createPreload} from './createElements.js';
+
 const URL = 'https://knowledgeable-mammoth-parka.glitch.me/api/goods';
 
 const fetchRequest = async (url, {
@@ -15,8 +17,13 @@ const fetchRequest = async (url, {
     if (body) options.body = JSON.stringify(body);
     if (headers) options.headers = headers;
 
+    const preload = createPreload();
+    document.body.append(preload);
+
     const response = await fetch(url, options);
     const data = await response.json();
+
+    preload.remove();
 
     if (response.ok) {
 

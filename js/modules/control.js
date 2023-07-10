@@ -165,35 +165,64 @@ const formControl = (list, goods, form, overlay) => {
     }
   });
 
+  // Работа с полями: запрещаем ввод не валидных значений
+  form.addEventListener('input', e => {
+    const target = e.target;
+
+    if (
+      target.classList.contains('form__field-text')
+      || target.classList.contains('form__description')
+      ) {
+      if (['title', 'category', 'description'].includes(target.name)) {
+        target.value = target.value.replace(/[^а-яё ]+/gi, ''); // только кириллица и пробел
+      }
+
+      if (['discount', 'count', 'price'].includes(target.name)) {
+        target.value = target.value.replace(/\D+/gi, ''); // только цифры
+      }
+
+      if (target.name === 'units') {
+        target.value = target.value.replace(/[^а-яё]+/gi, ''); // только кириллица
+      }
+    }
+  });
+
   // Обработка событий формы: добавить новый товар, обновить итоговую сумму
   form.addEventListener('submit', async e => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const product = Object.fromEntries(formData);
+    const notice = form.querySelector('.form__notice');
 
-    // Если есть ID товара, то редактируем. Иначе - создаем
-    if (form.id) {
-      if (! product.hasOwnProperty('discount')) {
-        product.discount = 0;
-      }
-
-      const editedProduct = await editGood(form.id, product);
-      const index = goods.findIndex((good) => good.id == form.id);
-      const row = list.children[index + 1]; // index = 0 - это шапка th в таблице
-
-      if (index !== -1) {
-        goods[index] = editedProduct;
-        row.replaceWith(createRow(editedProduct));
-      }
+    if (product.description.length < 80) {
+      notice.textContent = 'Описание должно быть не менее 80 символов';
     } else {
-      const addedProduct = await addGood(product);
-      list.append(createRow(addedProduct));
-      goods.push(addedProduct);
-    }
+      notice.textContent = '';
 
-    updateTotalPrice(goods);
-    closeModal(overlay);
+      // Если есть ID товара, то редактируем. Иначе - создаем
+      if (form.id) {
+        if (! product.hasOwnProperty('discount')) {
+          product.discount = 0;
+        }
+
+        const editedProduct = await editGood(form.id, product);
+        const index = goods.findIndex((good) => good.id == form.id);
+        const row = list.children[index + 1]; // index = 0 - это шапка th в таблице
+
+        if (index !== -1) {
+          goods[index] = editedProduct;
+          row.replaceWith(createRow(editedProduct));
+        }
+      } else {
+        const addedProduct = await addGood(product);
+        list.append(createRow(addedProduct));
+        goods.push(addedProduct);
+      }
+
+      updateTotalPrice(goods);
+      closeModal(overlay);
+    }
   });
 };
 

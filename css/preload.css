@@ -1,0 +1,32 @@
+.overlay-preload {
+  display: flex;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+
+  width: 100%;
+  min-height: 100vh;
+
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.preload {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  background: url("../img/preload.svg") center no-repeat;
+
+  animation: rotate .6s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-180deg);
+  }
+}
