@@ -1,3 +1,9 @@
+import {loadStyle} from './loadStyle.js';
+import {formControl} from './control.js';
+import {getCategories} from './ajax.js';
+
+const modals = new Map();
+
 export const createRow = (product) => {
   const tr = document.createElement('tr');
   let tdItems = [
@@ -6,18 +12,42 @@ export const createRow = (product) => {
 
   tdItems = tdItems.map((item) => {
     const td = document.createElement('td');
+    let hasImage = false;
+
+    tr.dataset.pic = product.image;
+
+    if (product.image !== 'image/notimage.jpg') {
+      hasImage = true;
+    }
 
     if (item === 'total') {
       td.append(product.price * product.count);
     } else if (item === 'btns') {
-      td.insertAdjacentHTML('afterBegin', `<div class="products__actions">
+      const divActions = document.createElement('div');
+      const buttonImg = document.createElement('button');
+      const buttonEdit = document.createElement('button');
+      const buttonDelete = document.createElement('button');
+
+      divActions.classList.add('products__actions');
+      buttonImg.classList.add('products__actions-btn');
+      buttonEdit.classList.add('products__actions-btn', 'products__actions-btn--edit');
+      buttonDelete.classList.add('products__actions-btn', 'products__actions-btn--delete');
+
+      if (hasImage) {
+        buttonImg.classList.add('products__actions-btn--img');
+      }
+
+      divActions.append(buttonImg, buttonEdit, buttonDelete);
+      td.append(divActions);
+
+      /* td.insertAdjacentHTML('afterBegin', `<div class="products__actions">
         <button class="products__actions-btn products__actions-btn--img">
         </button>
         <button class="products__actions-btn products__actions-btn--edit">
         </button>
         <button class="products__actions-btn products__actions-btn--delete">
         </button>
-      </div>`);
+      </div>`); */
     } else {
       td.append(product[item]);
     }
@@ -29,13 +59,14 @@ export const createRow = (product) => {
     tr.append(item);
   });
 
-  // tr.setAttribute('data-pic', 'url');
-  tr.dataset.pic = 'img/promo-item-3.jpg';
-
   return tr;
 };
 
-export const createModal = () => {
+export const createModal = async () => {
+  if (modals.has('modal')) {
+    return modals.get('modal');
+  }
+
   const overlay = document.createElement('div');
   overlay.classList.add('overlay');
   overlay.insertAdjacentHTML('beforeend', `
@@ -51,10 +82,14 @@ export const createModal = () => {
           <span class="form__label-text">Наименование</span>
           <input class="form__field-text" type="text" name="title" required value="">
         </label>
+
         <label class="form__label form__label--category">
           <span class="form__label-text">Категория</span>
-          <input class="form__field-text" type="text" name="category" required value="">
+          <input class="form__field-text" type="text" name="category" id="category" list="category-list" required>
         </label>
+        <datalist id="category-list">
+        </datalist>
+
         <label class="form__label form__label--units">
           <span class="form__label-text">Единицы измерения</span>
           <input class="form__field-text" type="text" name="units" required value="">
@@ -109,6 +144,20 @@ export const createModal = () => {
     <div class="modal-wrong__text">Что-то пошло не так</div>
   </div>
   `);
+
+  const categoryListElem = overlay.querySelector('#category-list');
+  const categories = await getCategories();
+
+  categories.forEach(category => {
+    const optionElem = document.createElement('option');
+
+    optionElem.value = category;
+    categoryListElem.append(optionElem);
+  });
+
+  formControl(overlay);  // Навешиваем события на форму
+  modals.set('modal', overlay);
+  await loadStyle('css/modal.css');
 
   return overlay;
 };

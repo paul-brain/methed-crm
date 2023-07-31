@@ -1,6 +1,8 @@
 import {createPreload} from './createElements.js';
+import {createModal} from './createElements.js';
 
-const URL = 'https://knowledgeable-mammoth-parka.glitch.me/api/goods';
+export const APIURL = 'https://knowledgeable-mammoth-parka.glitch.me/api/goods';
+// export const APIURL = 'http://localhost:3000/api/goods';
 
 const fetchRequest = async (url, {
   method = 'GET',
@@ -26,7 +28,6 @@ const fetchRequest = async (url, {
     preload.remove();
 
     if (response.ok) {
-
       if (callback) callback(null, data);
 
       return data;
@@ -35,13 +36,15 @@ const fetchRequest = async (url, {
     throw new Error(`Ошибка ${response.status}: ${data.message}`);
   } catch (err) {
     callbackError(err.message);
+
+    return [];
   }
 };
 
-export const errorNotice = (message) => {
-  const modal = document.querySelector('.modal-wrong');
-  const modalText = document.querySelector('.modal-wrong__text');
-  const modalOverlay = document.querySelector('.overlay');
+export const errorNotice = async (message) => {
+  const modalOverlay = await createModal();
+  const modalWrong = modalOverlay.querySelector('.modal-wrong');
+  const modalText = modalOverlay.querySelector('.modal-wrong__text');
 
   if (message.includes('Ошибка')) {
     modalText.textContent = message;
@@ -49,23 +52,29 @@ export const errorNotice = (message) => {
     modalText.textContent = 'Что-то пошло не так';
   }
 
+  document.body.append(modalOverlay);
   modalOverlay.classList.add('overlay--show');
-  modal.classList.add('modal-wrong--show');
+  modalWrong.classList.add('modal-wrong--show');
 };
 
-export const getGoods = () => {
-  const url = URL;
+export const getGoods = (search = '') => {
+  const url = new URL(APIURL);
   const options = {
     method: 'GET',
     callbackError: errorNotice,
   };
+
+  if (search) {
+    url.searchParams.append('search', search);
+  }
+
   const goods = fetchRequest(url, options);
 
   return goods;
 };
 
 export const getGood = (id) => {
-  const url = `${URL}/${id}`;
+  const url = `${APIURL}/${id}`;
   const options = {
     method: 'GET',
     callbackError: errorNotice,
@@ -76,7 +85,7 @@ export const getGood = (id) => {
 };
 
 export const addGood = (product) => {
-  const url = URL;
+  const url = APIURL;
   const options = {
     method: 'POST',
     headers: {
@@ -91,7 +100,7 @@ export const addGood = (product) => {
 };
 
 export const editGood = (id, product) => {
-  const url = `${URL}/${id}`;
+  const url = `${APIURL}/${id}`;
   const options = {
     method: 'PATCH',
     headers: {
@@ -106,10 +115,22 @@ export const editGood = (id, product) => {
 };
 
 export const deleteGood = (id) => {
-  const url = `${URL}/${id}`;
+  const url = `${APIURL}/${id}`;
   const options = {
     method: 'delete',
     callbackError: errorNotice,
   };
   fetchRequest(url, options);
+};
+
+export const getCategories = () => {
+  const url = new URL(APIURL.replace('goods', 'category'));
+  const options = {
+    method: 'GET',
+    callbackError: errorNotice,
+  };
+
+  const categories = fetchRequest(url, options);
+
+  return categories;
 };

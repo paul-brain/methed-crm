@@ -10,3 +10,18 @@ export const generateId = () => {
 export const calcTotalPrice = (goods) => goods.reduce(
     (sum, product) => sum + product.price * product.count, 0,
 );
+
+// Кодируем изображение в строку base64
+export const toBase64 = file => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+
+  reader.addEventListener('loadend', () => {
+    resolve(reader.result);			// результат уже в формате base64
+  });
+
+  reader.addEventListener('error', err => {
+    reject(err);
+  });
+
+  reader.readAsDataURL(file);
+});

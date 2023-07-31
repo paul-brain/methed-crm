@@ -103,6 +103,7 @@
   /* почему-то не работает и его плющит */
   background: transparent url("../img/search-btn.svg") 10px center no-repeat;
   border: none;
+  cursor: pointer;
 }
 
 .products__search-input {
@@ -115,6 +116,10 @@
 
   border: none;
   background-color: transparent;
+}
+
+.products__search-input:focus {
+  outline: none;
 }
 
 .products__search-input::placeholder {
@@ -198,18 +203,22 @@
   height: 20px;
   background: transparent url("../img/actions-no-img.svg") no-repeat;
   border: none;
+  cursor: auto;
 }
 
 .products__actions-btn--img {
   background-image: url("../img/actions-img.svg");
+  cursor: pointer;
 }
 
 .products__actions-btn--edit {
   background-image: url("../img/actions-edit.svg");
+  cursor: pointer;
 }
 
 .products__actions-btn--delete {
   background-image: url("../img/actions-delete.svg");
+  cursor: pointer;
 }
 /* Конец таблицы */
 

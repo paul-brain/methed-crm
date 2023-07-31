@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -27,7 +28,7 @@
       <!-- <div class="error">Произошла ошибка!</div> -->
       <div class="products__control products__control--top">
         <button class="products__filter-btn">Фильтр</button>
-        <form class="products__search" action="#" method="post">
+        <form class="products__search" action="/" method="post">
           <input class="products__search-btn" type="submit" value="">
           <input class="products__search-input" type="text" name="search" placeholder="Поиск по наименованию и категории">
         </form>
@@ -35,32 +36,34 @@
       </div>
       <div class="table__wrapper">
         <table class="products__list">
-          <tr class="products__list-header">
-            <td>ID</td>
-            <td>Наименование</td>
-            <td>Категория</td>
-            <td>Ед/изм</td>
-            <td>Количество</td>
-            <td>Цена</td>
-            <td>Итог</td>
-            <td></td>
-          </tr>
-          <!-- <tr data-pic="img/promo-item-3.jpg">
-            <td>10000001</td>
-            <td>Нет в базе: демонстрация ошибки</td>
-            <td>Нет</td>
-            <td>шт</td>
-            <td>0</td>
-            <td>0000</td>
-            <td>0000</td>
-            <td>
-              <div class="products__actions">
-                <button class="products__actions-btn products__actions-btn--img"></button>
-                <button class="products__actions-btn products__actions-btn--edit"></button>
-                <button class="products__actions-btn products__actions-btn--delete"></button>
-              </div>
-            </td>
-          </tr> -->
+          <tbody>
+            <!-- <tr class="products__list-header">
+              <td>ID</td>
+              <td>Наименование</td>
+              <td>Категория</td>
+              <td>Ед/изм</td>
+              <td>Количество</td>
+              <td>Цена</td>
+              <td>Итог</td>
+              <td></td>
+            </tr>
+            <tr data-pic="img/promo-item-3.jpg">
+              <td>10000001</td>
+              <td>Нет в базе: демонстрация ошибки</td>
+              <td>Нет</td>
+              <td>шт</td>
+              <td>0</td>
+              <td>0000</td>
+              <td>0000</td>
+              <td>
+                <div class="products__actions">
+                  <button class="products__actions-btn products__actions-btn--img"></button>
+                  <button class="products__actions-btn products__actions-btn--edit"></button>
+                  <button class="products__actions-btn products__actions-btn--delete"></button>
+                </div>
+              </td>
+            </tr> -->
+          </tbody>
         </table>
       </div>
       <div class="products__control products__control--bottom">
